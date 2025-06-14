@@ -14,6 +14,7 @@ use snafu::prelude::*;
 ///
 /// <https://aria2.github.io/manual/en/html/aria2c.html#aria2.changePosition>
 #[derive(Serialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 pub enum PositionHow {
     #[serde(rename = "POS_SET")]
     Set,

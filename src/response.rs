@@ -3,6 +3,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::{serde_as, DisplayFromStr, TimestampSeconds};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 #[serde(rename_all = "camelCase")]
 pub struct Version {
     pub enabled_features: Vec<String>,
@@ -15,6 +16,7 @@ pub struct Version {
 /// <https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus>
 #[serde_as]
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 #[serde(rename_all = "camelCase")]
 pub struct Status {
     /// GID of the download.
@@ -118,6 +120,7 @@ pub struct Status {
 
 #[serde_as]
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 #[serde(rename_all = "camelCase")]
 pub struct BittorrentStatus {
     pub announce_list: Vec<Vec<String>>,
@@ -131,6 +134,7 @@ pub struct BittorrentStatus {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 #[serde(rename_all = "lowercase")]
 pub enum BitTorrentFileMode {
     Single,
@@ -139,6 +143,7 @@ pub enum BitTorrentFileMode {
 
 #[serde_as]
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 #[serde(rename_all = "camelCase")]
 pub struct File {
     #[serde_as(as = "DisplayFromStr")]
@@ -159,6 +164,7 @@ pub struct File {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 #[serde(rename_all = "camelCase")]
 pub struct Uri {
     pub status: UriStatus,
@@ -167,6 +173,7 @@ pub struct Uri {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 #[serde(rename_all = "lowercase")]
 pub enum UriStatus {
     Used,
@@ -189,6 +196,7 @@ pub enum UriStatus {
 ///
 /// <https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus>
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 #[serde(rename_all = "lowercase")]
 pub enum TaskStatus {
     Active,
@@ -201,6 +209,7 @@ pub enum TaskStatus {
 
 #[serde_as]
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 #[serde(rename_all = "camelCase")]
 pub struct Peer {
     #[serde_as(as = "DisplayFromStr")]
@@ -230,6 +239,7 @@ pub struct Peer {
 
 #[serde_as]
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 #[serde(rename_all = "camelCase")]
 pub struct GlobalStat {
     #[serde_as(as = "DisplayFromStr")]
@@ -252,6 +262,7 @@ pub struct GlobalStat {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 #[serde(rename_all = "camelCase")]
 pub struct SessionInfo {
     pub session_id: String,
@@ -259,6 +270,7 @@ pub struct SessionInfo {
 
 #[serde_as]
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 #[serde(rename_all = "camelCase")]
 pub struct GetServersResult {
     #[serde_as(as = "DisplayFromStr")]
@@ -269,6 +281,7 @@ pub struct GetServersResult {
 
 #[serde_as]
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 #[serde(rename_all = "camelCase")]
 pub struct Server {
     pub uri: String,

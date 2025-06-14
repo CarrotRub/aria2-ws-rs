@@ -10,6 +10,7 @@ use serde_with::{serde_as, skip_serializing_none, DisplayFromStr};
 #[serde_as]
 #[skip_serializing_none]
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq, Default)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 #[serde(rename_all = "kebab-case")]
 pub struct TaskOptions {
     pub header: Option<Vec<String>>,

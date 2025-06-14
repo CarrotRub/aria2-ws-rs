@@ -138,6 +138,7 @@ use snafu::OptionExt;
 pub(crate) type Result<T> = std::result::Result<T, Error>;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 pub struct RpcRequest {
     pub id: Option<i32>,
     pub jsonrpc: String,
@@ -148,6 +149,7 @@ pub struct RpcRequest {
 
 /// Error returned by RPC calls.
 #[derive(Serialize, Deserialize, Debug, Clone)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 pub struct Aria2Error {
     pub code: i32,
     pub message: String,
@@ -164,6 +166,7 @@ impl std::fmt::Display for Aria2Error {
 impl std::error::Error for Aria2Error {}
 
 #[derive(Deserialize, Debug, Clone)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 pub struct RpcResponse {
     pub id: Option<i32>,
     pub jsonrpc: String,
@@ -173,6 +176,7 @@ pub struct RpcResponse {
 
 /// Events about download progress from aria2.
 #[derive(Debug, Clone, PartialEq, Eq, Copy, Hash)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 pub enum Event {
     Start,
     Pause,
@@ -202,6 +206,7 @@ impl TryFrom<&str> for Event {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 pub enum Notification {
     Aria2 { gid: String, event: Event },
     WebSocketConnected,
@@ -212,7 +217,7 @@ impl TryFrom<&RpcRequest> for Notification {
     type Error = crate::Error;
 
     fn try_from(req: &RpcRequest) -> Result<Self> {
-        let gid = (|| req.params.get(0)?.get("gid")?.as_str())()
+        let gid = (|| req.params.first()?.get("gid")?.as_str())()
             .with_context(|| error::ParseSnafu {
                 value: format!("{:?}", req),
                 to: "Notification",

@@ -14,9 +14,23 @@ tokio = { version = "1", features = ["full"] }
 env_logger = "0.11"
 test-log = "0.2"
 
+[features]
+default = []
+specta = ["dep:specta"]
+
 [dependencies]
 tokio = { version = "1", features = ["sync", "time", "macros", "rt"] }
 serde = { version = "1", features = ["derive"] }
+specta = { version = "2.0.0-rc.22", optional = true, features = [
+    "serde",
+    "serde_json",
+    "derive",
+    "function",
+    "indexmap",
+    "chrono",
+    "url",
+    "uuid",
+] }
 serde_json = "1"
 tokio-tungstenite = "0.26"
 futures = "0.3"
