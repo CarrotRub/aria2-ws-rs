@@ -207,6 +207,33 @@ pub enum TaskStatus {
     Removed,
 }
 
+impl From<TaskStatus> for String {
+    fn from(val: TaskStatus) -> Self {
+        match val {
+            TaskStatus::Active => "active".to_string(),
+            TaskStatus::Waiting => "waiting".to_string(),
+            TaskStatus::Paused => "paused".to_string(),
+            TaskStatus::Error => "error".to_string(),
+            TaskStatus::Removed => "removed".to_string(),
+            TaskStatus::Complete => "complete".to_string(),
+        }
+    }
+}
+
+impl From<&str> for TaskStatus {
+    fn from(value: &str) -> Self {
+        match value {
+            "active" => TaskStatus::Active,
+            "waiting" => TaskStatus::Waiting,
+            "paused" => TaskStatus::Paused,
+            "error" => TaskStatus::Error,
+            "removed" => TaskStatus::Removed,
+            "complete" => TaskStatus::Complete,
+            _ => TaskStatus::Waiting,
+        }
+    }
+}
+
 #[serde_as]
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
 #[cfg_attr(feature = "specta", derive(specta::Type))]
